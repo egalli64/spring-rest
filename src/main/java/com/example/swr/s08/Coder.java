@@ -25,7 +25,7 @@ public class Coder {
     public Coder() {
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
