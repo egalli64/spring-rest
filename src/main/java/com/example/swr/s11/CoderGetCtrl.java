@@ -34,7 +34,7 @@ public class CoderGetCtrl {
         /*
          * !! Unsatisfactory approach !!
          * 
-         * When id is missing, user get a 500 status instead of 404
+         * When there is no coder with the passed id, user get a 500 status instead of 404
          * 
          * See a better solution in the next example
          */
