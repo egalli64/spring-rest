@@ -1,4 +1,4 @@
-package com.example.swr.s14;
+package com.example.swr.s16;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class CoderDeleteCtrl {
         this.repo = repo;
     }
 
-    @DeleteMapping("/s14/coders/{id}")
+    @DeleteMapping("/s16/coders/{id}")
     public void delete(@PathVariable Integer id) {
         log.trace("delete " + id);
         try {
