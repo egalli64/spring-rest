@@ -1,4 +1,4 @@
-package com.example.swr.s14;
+package com.example.swr.s10;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.swr.s08.Coder;
-import com.example.swr.s08.CoderRepo;
+import com.example.swr.s04.Coder;
+import com.example.swr.s04.CoderRepo;
 
 @RestController
 public class CoderPutCtrl {
@@ -22,7 +22,7 @@ public class CoderPutCtrl {
         this.repo = repo;
     }
 
-    @PutMapping("/s14/coders/{id}")
+    @PutMapping("/s10/coders/{id}")
     public Coder update(@RequestBody Coder newer, @PathVariable Integer id) {
         log.trace(String.format("update coder %d by %s", id, newer));
         return repo.findById(id).map(coder -> {

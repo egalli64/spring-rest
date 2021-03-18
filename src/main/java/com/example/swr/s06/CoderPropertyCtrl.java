@@ -1,4 +1,4 @@
-package com.example.swr.s10;
+package com.example.swr.s06;
 
 import java.util.List;
 
@@ -8,21 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.swr.s08.Coder;
-import com.example.swr.s08.CoderRepo;
+import com.example.swr.s04.Coder;
+import com.example.swr.s04.CoderRepo;
 
 @RestController
-public class CoderSetterCtrl {
-    private static final Logger log = LoggerFactory.getLogger(CoderSetterCtrl.class);
-
-    private CoderRepo repo;
+public class CoderPropertyCtrl {
+    private static final Logger log = LoggerFactory.getLogger(CoderPropertyCtrl.class);
 
     @Autowired
-    public void setRepo(CoderRepo repo) {
-        this.repo = repo;
-    }
+    private CoderRepo repo;
 
-    @GetMapping("/s10s/coders")
+    @GetMapping("/s06p/coders")
     public List<Coder> getAll() {
         log.trace("getAll");
         return repo.findAll();

@@ -1,4 +1,4 @@
-package com.example.swr.s12;
+package com.example.swr.s08;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.swr.s08.Coder;
-import com.example.swr.s08.CoderRepo;
+import com.example.swr.s04.Coder;
+import com.example.swr.s04.CoderRepo;
 
 @RestController
 public class CoderGetOr404Ctrl {
@@ -21,7 +21,7 @@ public class CoderGetOr404Ctrl {
         this.repo = repo;
     }
 
-    @GetMapping("/s12/coders/{id}")
+    @GetMapping("/s08/coders/{id}")
     public Coder get(@PathVariable Integer id) {
         log.trace("get " + id);
         return repo.findById(id).orElseThrow( //

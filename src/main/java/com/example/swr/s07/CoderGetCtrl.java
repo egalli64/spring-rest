@@ -1,4 +1,4 @@
-package com.example.swr.s11;
+package com.example.swr.s07;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.swr.s08.Coder;
-import com.example.swr.s08.CoderRepo;
+import com.example.swr.s04.Coder;
+import com.example.swr.s04.CoderRepo;
 
 @RestController
 public class CoderGetCtrl {
@@ -21,13 +21,13 @@ public class CoderGetCtrl {
         this.repo = repo;
     }
 
-    @GetMapping("/s11/coders")
+    @GetMapping("/s07/coders")
     public List<Coder> getAll() {
         log.trace("getAll");
         return repo.findAll();
     }
 
-    @GetMapping("/s11/coders/{id}")
+    @GetMapping("/s07/coders/{id}")
     public Coder get(@PathVariable Integer id) {
         log.trace("get " + id);
 

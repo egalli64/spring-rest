@@ -1,4 +1,4 @@
-package com.example.swr.s06;
+package com.example.swr.s03;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.example.swr.s16;
+package com.example.swr.s12;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.swr.s08.CoderRepo;
+import com.example.swr.s04.CoderRepo;
 
 @RestController
 public class CoderDeleteCtrl {
@@ -21,7 +21,7 @@ public class CoderDeleteCtrl {
         this.repo = repo;
     }
 
-    @DeleteMapping("/s16/coders/{id}")
+    @DeleteMapping("/s12/coders/{id}")
     public void delete(@PathVariable Integer id) {
         log.trace("delete " + id);
         try {
