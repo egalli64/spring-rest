@@ -12,20 +12,26 @@ import com.example.swr.dao.Coder;
 import com.example.swr.dao.CoderRepo;
 
 @RestController
-public class CoderGetOr404Ctrl {
-    private static final Logger log = LogManager.getLogger(CoderGetOr404Ctrl.class);
+public class CoderGetOrStatusCtrl {
+    private static final Logger log = LogManager.getLogger(CoderGetOrStatusCtrl.class);
 
     private CoderRepo repo;
 
-    public CoderGetOr404Ctrl(CoderRepo repo) {
+    public CoderGetOrStatusCtrl(CoderRepo repo) {
         this.repo = repo;
     }
 
     @GetMapping("/s05/coders/{id}")
     public Coder get(@PathVariable Integer id) {
-        log.trace("get " + id);
+        log.traceEntry("get " + id);
         return repo.findById(id).orElseThrow( //
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Coder %d not found", id)));
+    }
+
+    @GetMapping("/s05/coders/mistake")
+    public Coder mistake() {
+        log.traceEntry("mistake");
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, String.format("Something bad happened"));
     }
 
 }
