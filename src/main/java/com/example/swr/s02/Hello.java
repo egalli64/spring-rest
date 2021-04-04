@@ -1,4 +1,4 @@
-package com.example.swr.s03;
+package com.example.swr.s02;
 
 public class Hello {
     private String message;

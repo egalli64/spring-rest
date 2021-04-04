@@ -1,4 +1,4 @@
-package com.example.swr.s04;
+package com.example.swr.dao;
 
 import java.time.LocalDate;
 

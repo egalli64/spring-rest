@@ -1,19 +1,17 @@
-package com.example.swr.s07;
+package com.example.swr.s04;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.swr.s04.Coder;
-import com.example.swr.s04.CoderRepo;
+import com.example.swr.dao.Coder;
+import com.example.swr.dao.CoderRepo;
 
 @RestController
 public class CoderGetCtrl {
-    private static final Logger log = LoggerFactory.getLogger(CoderGetCtrl.class);
+    private static final Logger log = LogManager.getLogger(CoderGetCtrl.class);
 
     private CoderRepo repo;
 
@@ -21,15 +19,15 @@ public class CoderGetCtrl {
         this.repo = repo;
     }
 
-    @GetMapping("/s07/coders")
-    public List<Coder> getAll() {
-        log.trace("getAll");
+    @GetMapping("/s04/coders")
+    public Iterable<Coder> getAll() {
+        log.traceEntry("getAll");
         return repo.findAll();
     }
 
-    @GetMapping("/s07/coders/{id}")
+    @GetMapping("/s04/coders/{id}")
     public Coder get(@PathVariable Integer id) {
-        log.trace("get " + id);
+        log.traceEntry("get " + id);
 
         /*
          * !! Unsatisfactory approach !!

@@ -1,7 +1,7 @@
-package com.example.swr.s10;
+package com.example.swr.s07;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.swr.s04.Coder;
-import com.example.swr.s04.CoderRepo;
+import com.example.swr.dao.Coder;
+import com.example.swr.dao.CoderRepo;
 
 @RestController
 public class CoderPutCtrl {
-    private static final Logger log = LoggerFactory.getLogger(CoderPutCtrl.class);
+    private static final Logger log = LogManager.getLogger(CoderPutCtrl.class);
 
     private CoderRepo repo;
 
@@ -22,7 +22,7 @@ public class CoderPutCtrl {
         this.repo = repo;
     }
 
-    @PutMapping("/s10/coders/{id}")
+    @PutMapping("/s07/coders/{id}")
     public Coder update(@RequestBody Coder newer, @PathVariable Integer id) {
         log.trace(String.format("update coder %d by %s", id, newer));
         return repo.findById(id).map(coder -> {

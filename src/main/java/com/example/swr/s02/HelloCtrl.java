@@ -1,7 +1,7 @@
-package com.example.swr.s03;
+package com.example.swr.s02;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,11 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class HelloCtrl {
-    private static final Logger log = LoggerFactory.getLogger(HelloCtrl.class);
+    private static final Logger log = LogManager.getLogger(HelloCtrl.class);
+
+    @GetMapping("/answer")
+    int answer() {
+        log.traceEntry("answer");
+        return 42;
+    }
 
     @GetMapping("/hello")
     Hello sayHello() {
-        log.trace("hello");
+        log.traceEntry("sayHello");
         return new Hello("Hello World!");
     }
 }
