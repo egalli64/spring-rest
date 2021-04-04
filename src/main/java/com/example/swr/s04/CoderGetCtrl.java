@@ -4,12 +4,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.swr.dao.Coder;
 import com.example.swr.dao.CoderRepo;
 
 @RestController
+@RequestMapping("/s04")
 public class CoderGetCtrl {
     private static final Logger log = LogManager.getLogger(CoderGetCtrl.class);
 
@@ -19,13 +21,13 @@ public class CoderGetCtrl {
         this.repo = repo;
     }
 
-    @GetMapping("/s04/coders")
+    @GetMapping("/coders")
     public Iterable<Coder> getAll() {
         log.traceEntry("getAll");
         return repo.findAll();
     }
 
-    @GetMapping("/s04/coders/{id}")
+    @GetMapping("/coders/{id}")
     public Coder get(@PathVariable Integer id) {
         log.traceEntry("get " + id);
 

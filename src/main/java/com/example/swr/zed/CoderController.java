@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.swr.dao.Coder;
 import com.example.swr.dao.CoderRepo;
 
 @RestController
+@RequestMapping("/coders")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CoderController {
     private static final Logger log = LogManager.getLogger(CoderController.class);
@@ -27,25 +29,25 @@ public class CoderController {
         this.repo = repo;
     }
 
-    @GetMapping("/coders")
+    @GetMapping()
     public Iterable<Coder> getAll() {
         log.trace("getAll");
         return repo.findAll();
     }
 
-    @GetMapping("/coders/{id}")
+    @GetMapping("/{id}")
     public Coder get(@PathVariable Integer id) {
         log.trace("get " + id);
         return repo.findById(id).orElseThrow(() -> new SwrNotFoundException(id));
     }
 
-    @PostMapping("/coders")
+    @PostMapping("/")
     public Coder create(@RequestBody Coder coder) {
         log.trace("create " + coder);
         return repo.save(coder);
     }
 
-    @PutMapping("/coders/{id}")
+    @PutMapping("/{id}")
     public Coder update(@RequestBody Coder newer, @PathVariable Integer id) {
         log.trace(String.format("update coder %d by %s", id, newer));
         return repo.findById(id).map(coder -> {
@@ -57,7 +59,7 @@ public class CoderController {
         }).orElseThrow(() -> new SwrNotFoundException(id));
     }
 
-    @PatchMapping("/coders/{id}")
+    @PatchMapping("/{id}")
     public Coder partialUpdate(@RequestBody Coder newer, @PathVariable Integer id) {
         log.trace(String.format("partialUpdate coder %d by %s", id, newer));
         return repo.findById(id).map(coder -> {
@@ -77,7 +79,7 @@ public class CoderController {
         }).orElseThrow(() -> new SwrNotFoundException(id));
     }
 
-    @DeleteMapping("/coders/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         log.trace("delete " + id);
 

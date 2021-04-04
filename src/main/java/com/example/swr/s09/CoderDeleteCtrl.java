@@ -6,12 +6,14 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.swr.dao.CoderRepo;
 
 @RestController
+@RequestMapping("/s09")
 public class CoderDeleteCtrl {
     private static final Logger log = LogManager.getLogger(CoderDeleteCtrl.class);
 
@@ -21,7 +23,7 @@ public class CoderDeleteCtrl {
         this.repo = repo;
     }
 
-    @DeleteMapping("/s09/coders/{id}")
+    @DeleteMapping("/coders/{id}")
     public void delete(@PathVariable Integer id) {
         log.trace("delete " + id);
         try {
