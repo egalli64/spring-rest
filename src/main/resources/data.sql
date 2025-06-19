@@ -38,7 +38,7 @@ insert into coders (coder_id, first_name, last_name, hire_date, salary)
 	values (107, 'Diana', 'Lorentz', '2007-02-07', 4200.00);
 
 insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (201, 'Tim', 'Ice', TODAY, 5760);
+	values (201, 'Tim', 'Ice', CURRENT_DATE, 5760);
 
 --
 create table teams(
