@@ -1,4 +1,4 @@
-package com.example.swr.s04;
+package com.example.swr.s4;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,7 @@ import com.example.swr.dao.Coder;
 import com.example.swr.dao.CoderRepo;
 
 @RestController
-@RequestMapping("/s04")
+@RequestMapping("/s4")
 public class CoderGetCtrl {
     private static final Logger log = LogManager.getLogger(CoderGetCtrl.class);
 
