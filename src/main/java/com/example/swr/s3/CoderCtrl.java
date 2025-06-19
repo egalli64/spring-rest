@@ -1,4 +1,4 @@
-package com.example.swr.s03;
+package com.example.swr.s3;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +10,7 @@ import com.example.swr.dao.Coder;
 import com.example.swr.dao.CoderRepo;
 
 @RestController
-@RequestMapping("/s03")
+@RequestMapping("/s3")
 public class CoderCtrl {
     private static final Logger log = LogManager.getLogger(CoderCtrl.class);
 
@@ -23,7 +23,9 @@ public class CoderCtrl {
     @GetMapping("coders")
     public Iterable<Coder> getAll() {
         log.traceEntry("getAll");
-        return repo.findAll();
+        Iterable<Coder> result = repo.findAll();
+        log.debug("Coders is not empty? {}", result.iterator().hasNext());
+        return result;
     }
 
     @GetMapping("mistake")
