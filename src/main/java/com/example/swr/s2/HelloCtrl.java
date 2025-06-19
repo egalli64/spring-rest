@@ -1,4 +1,4 @@
-package com.example.swr.s02;
+package com.example.swr.s2;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/s02")
+@RequestMapping("/s2")
 @CrossOrigin(origins = "http://localhost:4200")
 public class HelloCtrl {
     private static final Logger log = LogManager.getLogger(HelloCtrl.class);
