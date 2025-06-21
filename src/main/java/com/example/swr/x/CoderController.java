@@ -1,4 +1,4 @@
-package com.example.swr.zed;
+package com.example.swr.x;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,7 +41,7 @@ public class CoderController {
         return repo.findById(id).orElseThrow(() -> new SwrNotFoundException(id));
     }
 
-    @PostMapping("/")
+    @PostMapping()
     public Coder create(@RequestBody Coder coder) {
         log.trace("create " + coder);
         return repo.save(coder);

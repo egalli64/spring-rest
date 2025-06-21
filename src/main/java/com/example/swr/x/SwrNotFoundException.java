@@ -1,4 +1,4 @@
-package com.example.swr.zed;
+package com.example.swr.x;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

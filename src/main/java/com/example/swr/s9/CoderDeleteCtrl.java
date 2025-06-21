@@ -1,4 +1,4 @@
-package com.example.swr.s09;
+package com.example.swr.s9;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.swr.dao.CoderRepo;
 
 @RestController
-@RequestMapping("/s09")
+@RequestMapping("/s9")
 public class CoderDeleteCtrl {
     private static final Logger log = LogManager.getLogger(CoderDeleteCtrl.class);
 
