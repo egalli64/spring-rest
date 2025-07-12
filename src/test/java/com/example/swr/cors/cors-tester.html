@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CORS Tester</title>
+</head>
+<body>
+  <h1>CORS Tester</h1>
+
+  <label>API URL: <input id="url" type="text" size="50" value="http://localhost:8080/s2/answer"></label>
+  <button onclick="testCORS()">Test CORS</button>
+
+  <h3>Result:</h3>
+  <pre id="output"></pre>
+
+  <script>
+    function testCORS() {
+      const url = document.getElementById('url').value;
+      const output = document.getElementById('output');
+      output.textContent = 'Sending request...';
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error('HTTP error ' + response.status);
+          return response.text();
+        })
+        .then(data => {
+          output.textContent = '✅ Success: ' + data;
+        })
+        .catch(error => {
+          console.error('❌ CORS or network error:', error);
+          output.textContent = '❌ Failed: ' + error;
+        });
+    }
+  </script>
+</body>
+</html>
