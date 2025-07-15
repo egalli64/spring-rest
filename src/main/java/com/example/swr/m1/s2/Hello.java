@@ -1,5 +1,13 @@
-package com.example.swr.s2;
+/*
+ * A Spring Boot RESTful application 
+ * 
+ * https://github.com/egalli64/swr
+ */
+package com.example.swr.m1.s2;
 
+/**
+ * A very simple JavaBean
+ */
 public class Hello {
     private String message;
 
