@@ -1,3 +1,8 @@
+/*
+ * A Spring Boot RESTful application 
+ * 
+ * https://github.com/egalli64/swr
+ */
 package com.example.swr.cors;
 
 import com.sun.net.httpserver.HttpServer;
