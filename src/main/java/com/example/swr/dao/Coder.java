@@ -1,3 +1,8 @@
+/*
+ * A Spring Boot RESTful application 
+ * 
+ * https://github.com/egalli64/swr
+ */
 package com.example.swr.dao;
 
 import java.time.LocalDate;
@@ -9,7 +14,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
+/**
+ * A simple entity JPA
+ */
 @Entity
 @Table(name = "CODERS")
 public class Coder {
@@ -21,7 +28,7 @@ public class Coder {
     private String firstName;
     private String lastName;
     private LocalDate hireDate;
-    private double salary;
+    private Double salary;
 
     public Coder() {
     }
@@ -58,11 +65,11 @@ public class Coder {
         this.hireDate = hireDate;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
