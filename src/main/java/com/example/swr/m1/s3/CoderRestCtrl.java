@@ -61,7 +61,7 @@ public class CoderRestCtrl {
         curl -v localhost:8080/api/m1/s3/crash
      * </pre>
      */
-    @GetMapping("mistake")
+    @GetMapping("crash")
     public Iterable<Coder> crash() {
         log.traceEntry("crash");
         throw new IllegalStateException("Something bad happened");
