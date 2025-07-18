@@ -1,4 +1,9 @@
-package com.example.swr.s5;
+/*
+ * A Spring Boot RESTful application 
+ * 
+ * https://github.com/egalli64/swr
+ */
+package com.example.swr.m1.s4;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,14 +18,16 @@ import com.example.swr.dao.Coder;
 import com.example.swr.dao.CoderRepo;
 
 @RestController
-@RequestMapping("/s5")
+@RequestMapping("/api/m1/s4")
 public class CoderGetOrStatusCtrl {
     private static final Logger log = LogManager.getLogger(CoderGetOrStatusCtrl.class);
 
-    private CoderRepo repo;
+    private final CoderRepo repo;
+    private final DisappointingService svc;
 
-    public CoderGetOrStatusCtrl(CoderRepo repo) {
+    public CoderGetOrStatusCtrl(CoderRepo repo, DisappointingService svc) {
         this.repo = repo;
+        this.svc = svc;
     }
 
     @GetMapping("/coders/{id}")
@@ -30,9 +37,20 @@ public class CoderGetOrStatusCtrl {
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Coder %d not found", id)));
     }
 
-    @GetMapping("/coders/mistake")
-    public Coder mistake() {
-        log.traceEntry("mistake");
-        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, String.format("Something bad happened"));
+    @GetMapping("/coders/crash")
+    public void crash() {
+        log.traceEntry("crash");
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something bad happened");
+    }
+
+    @GetMapping("/coders/crash2")
+    public void crash2() {
+        log.traceEntry("crash2");
+
+        try {
+            svc.alwaysFailing();
+        } catch (IllegalStateException ex) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something bad happened", ex);
+        }
     }
 }
