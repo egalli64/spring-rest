@@ -28,12 +28,22 @@ public class CoderGetCtrl {
         this.repo = repo;
     }
 
+    /**
+     * <pre>
+        curl -v localhost:8080/api/m2/s2/coders
+     * </pre>
+     */
     @GetMapping("/coders")
     public Iterable<Coder> getAll() {
         log.traceEntry("getAll");
         return repo.findAll();
     }
 
+    /**
+     * <pre>
+        curl -v localhost:8080/api/m2/s2/coders/107
+     * </pre>
+     */
     @GetMapping("/coders/{id}")
     public Coder get(@PathVariable Integer id) {
         log.traceEntry("get " + id);
