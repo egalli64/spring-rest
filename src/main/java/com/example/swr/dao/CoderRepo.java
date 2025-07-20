@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CoderRepo extends CrudRepository<Coder, Integer> {
+    boolean existsByFirstNameAndLastName(String firstName, String lastName);
 }
