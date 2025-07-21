@@ -1,4 +1,9 @@
-package com.example.swr.s7;
+/*
+ * A Spring Boot RESTful application 
+ * 
+ * https://github.com/egalli64/swr
+ */
+package com.example.swr.m2.s4;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +19,7 @@ import com.example.swr.dao.Coder;
 import com.example.swr.dao.CoderRepo;
 
 @RestController
-@RequestMapping("/s7")
+@RequestMapping("/api/m2/s4")
 public class CoderPutCtrl {
     private static final Logger log = LogManager.getLogger(CoderPutCtrl.class);
 
@@ -24,6 +29,14 @@ public class CoderPutCtrl {
         this.repo = repo;
     }
 
+    /**
+     * <pre>
+        Assuming coder 1 has already been inserted - see POST in previous example
+        curl -i -X PUT -H "Content-Type: application/json" -d ^
+         "{\"firstName\":\"Tommy\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\"}" ^
+         localhost:8080/api/m2/s4/coders/1
+     * </pre>
+     */
     @PutMapping("/coders/{id}")
     public Coder update(@RequestBody Coder newer, @PathVariable Integer id) {
         log.trace(String.format("update coder %d by %s", id, newer));
