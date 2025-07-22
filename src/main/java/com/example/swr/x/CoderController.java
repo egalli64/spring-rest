@@ -72,7 +72,7 @@ public class CoderController {
             if (newer.getHireDate() != null) {
                 coder.setHireDate(newer.getHireDate());
             }
-            if (newer.getSalary() != 0.0) {
+            if (newer.getSalary() != null) {
                 coder.setSalary(newer.getSalary());
             }
             return repo.save(coder);

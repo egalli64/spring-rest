@@ -5,6 +5,7 @@
  */
 package com.example.swr.dao;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -28,7 +29,7 @@ public class Coder {
     private String firstName;
     private String lastName;
     private LocalDate hireDate;
-    private Double salary;
+    private BigDecimal salary;
 
     public Coder() {
     }
@@ -65,11 +66,11 @@ public class Coder {
         this.hireDate = hireDate;
     }
 
-    public Double getSalary() {
+    public BigDecimal getSalary() {
         return salary;
     }
 
-    public void setSalary(Double salary) {
+    public void setSalary(BigDecimal salary) {
         this.salary = salary;
     }
 
