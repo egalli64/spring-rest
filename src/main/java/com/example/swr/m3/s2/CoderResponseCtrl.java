@@ -19,8 +19,11 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.swr.dao.Coder;
 import com.example.swr.dao.CoderRepo;
 
+/**
+ * A controller using ResponseEntity
+ */
 @RestController
-@RequestMapping("/api/m3/s2/coders") // Base path for API Version 1
+@RequestMapping("/api/m3/s2/coders")
 public class CoderResponseCtrl {
     private static final Logger log = LogManager.getLogger(CoderResponseCtrl.class);
 
