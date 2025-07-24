@@ -39,6 +39,18 @@ insert into coders (coder_id, first_name, last_name, hire_date, salary)
 
 insert into coders (coder_id, first_name, last_name, hire_date, salary)
 	values (201, 'Tim', 'Ice', CURRENT_DATE, 5760);
+insert into coders (coder_id, first_name, last_name, hire_date, salary)
+	values (202, 'Alexander', 'Zinc', CURRENT_DATE - 1, 4560);
+insert into coders (coder_id, first_name, last_name, hire_date, salary)
+	values (203, 'Bruce', 'Dat Yolo', CURRENT_DATE - 2, 2345);
+insert into coders (coder_id, first_name, last_name, hire_date, salary)
+	values (204, 'Charlie', 'Wand', CURRENT_DATE - 3, 3456);
+insert into coders (coder_id, first_name, last_name, hire_date, salary)
+	values (205, 'Dan', 'Xeno', CURRENT_DATE - 4, 4567);
+insert into coders (coder_id, first_name, last_name, hire_date, salary)
+	values (206, 'Enoch', 'Void', CURRENT_DATE - 5, 5678);
+insert into coders (coder_id, first_name, last_name, hire_date, salary)
+	values (207, 'Fanny', 'Ulm', CURRENT_DATE - 6, 6789);
 
 --
 create table teams(
