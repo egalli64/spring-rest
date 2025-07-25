@@ -22,35 +22,36 @@ create table coders (
     last_name varchar(25) not null,
     hire_date date not null,
     salary decimal(8,2),
+    email varchar(30),
 
     constraint coders_name_uq unique(first_name, last_name)
 );
 
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (103,'Alexander','Hunold', '2006-01-03', 9000.00);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (104, 'Bruce', 'Ernst', '2007-05-21', 6000.00);	
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (105, 'David', 'Austin', '2005-06-25', 4800.00);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (106, 'Valli', 'Pataballa', '2006-02-05', 4800.00);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (107, 'Diana', 'Lorentz', '2007-02-07', 4200.00);
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (103,'Alexander','Hunold', '2006-01-03', 9000.00, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (104, 'Bruce', 'Ernst', '2007-05-21', 6000.00, 'default@example.com');	
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (105, 'David', 'Austin', '2005-06-25', 4800.00, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (106, 'Valli', 'Pataballa', '2006-02-05', 4800.00, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (107, 'Diana', 'Lorentz', '2007-02-07', 4200.00, 'default@example.com');
 
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (201, 'Tim', 'Ice', CURRENT_DATE, 5760);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (202, 'Alexander', 'Zinc', CURRENT_DATE - 1, 4560);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (203, 'Bruce', 'Dat Yolo', CURRENT_DATE - 2, 2345);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (204, 'Charlie', 'Wand', CURRENT_DATE - 3, 3456);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (205, 'Dan', 'Xeno', CURRENT_DATE - 4, 4567);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (206, 'Enoch', 'Void', CURRENT_DATE - 5, 5678);
-insert into coders (coder_id, first_name, last_name, hire_date, salary)
-	values (207, 'Fanny', 'Ulm', CURRENT_DATE - 6, 6789);
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (201, 'Tim', 'Ice', CURRENT_DATE, 5760, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (202, 'Alexander', 'Zinc', CURRENT_DATE - 1, 4560, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (203, 'Bruce', 'Dat Yolo', CURRENT_DATE - 2, 2345, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (204, 'Charlie', 'Wand', CURRENT_DATE - 3, 3456, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (205, 'Dan', 'Xeno', CURRENT_DATE - 4, 4567, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (206, 'Enoch', 'Void', CURRENT_DATE - 5, 5678, 'default@example.com');
+insert into coders (coder_id, first_name, last_name, hire_date, salary, email)
+	values (207, 'Fanny', 'Ulm', CURRENT_DATE - 6, 6789, 'default@example.com');
 
 --
 create table teams(
