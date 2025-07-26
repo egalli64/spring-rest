@@ -13,7 +13,7 @@ import org.springframework.hateoas.RepresentationModel;
 import com.example.swr.m3.s5.VersionedCoder;
 
 /**
- * HATEOS Coder DTO for response - version 1 (no email)
+ * HATEOAS Coder DTO for response - version 1 (no email)
  */
 public class CoderResponseV1H extends RepresentationModel<CoderResponseV1H> {
     private Integer id;
@@ -33,6 +33,9 @@ public class CoderResponseV1H extends RepresentationModel<CoderResponseV1H> {
         this.salary = salary;
     }
 
+    /**
+     * Entity to Response DTO mapper
+     */
     public CoderResponseV1H(VersionedCoder coder) {
         this(coder.getId(), coder.getFirstName(), coder.getLastName(), coder.getHireDate(), coder.getSalary());
     }
