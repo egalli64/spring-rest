@@ -1,0 +1,12 @@
+/* 
+    A Spring Boot RESTful application 
+
+    https://github.com/egalli64/swr
+ */
+body {
+	background-color: #fafaee;
+}
+
+h1 {
+	text-align: center;
+}
