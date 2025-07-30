@@ -8,13 +8,13 @@ package com.example.swr.m1.s2;
 /**
  * A very simple JavaBean
  */
-public class Hello {
+public class HelloBean {
     private String message;
 
-    public Hello() {
+    public HelloBean() {
     }
 
-    public Hello(String message) {
+    public HelloBean(String message) {
         this.message = message;
     }
 
