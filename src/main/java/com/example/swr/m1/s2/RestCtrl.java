@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/m1/s2")
 @CrossOrigin(origins = "http://localhost:4200")
-public class HelloCtrl {
-    private static final Logger log = LogManager.getLogger(HelloCtrl.class);
+public class RestCtrl {
+    private static final Logger log = LogManager.getLogger(RestCtrl.class);
 
     @GetMapping("/answer")
     int answer() {
-        log.traceEntry("answer");
+        log.traceEntry("answer()");
         return 42;
     }
 
-    @GetMapping("/hello")
-    Hello sayHello() {
-        log.traceEntry("sayHello");
-        return new Hello("Hello World!");
+    @GetMapping("/bean")
+    HelloBean bean() {
+        log.traceEntry("bean()");
+        return new HelloBean("Hello World!");
     }
 }
