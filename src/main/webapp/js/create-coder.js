@@ -4,6 +4,9 @@
  * https://github.com/egalli64/swr
  */
 
+/**
+ * Associated to the click event on a button - See HTML
+ */
 function create() {
 	let request = new XMLHttpRequest()
 	const url = "/api/m1/s3/coders"
@@ -13,7 +16,7 @@ function create() {
 		hireDate: document.getElementById("hired").value,
 		salary: parseInt(document.getElementById("salary").value)
 	}
-
+		
 	request.onload = callback
 	request.onerror = errorHandler
 	request.open("POST", url)
@@ -22,6 +25,9 @@ function create() {
 	request.send(JSON.stringify(data))
 }
 
+/**
+ * Callback in case of error for the create() AJAX call
+ */
 function errorHandler() {
 	let target = document.getElementById('target')
 	target.value += "Something bad happened, please check browser log for more details\n"
@@ -30,6 +36,9 @@ function errorHandler() {
 	}
 }
 
+/**
+ * Callback in case of success (load) for the create() AJAX call
+ */
 function callback() {
 	let target = document.getElementById('target');
 	if (this.status != 200) {
