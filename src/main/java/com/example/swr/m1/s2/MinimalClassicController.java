@@ -1,7 +1,7 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
 package com.example.swr.m1.s2;
 
@@ -12,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.swr.model.Hello;
+
 @Controller
 @RequestMapping("/m1/s2")
-public class ClassicCtrl {
-    private static final Logger log = LogManager.getLogger(RestCtrl.class);
+public class MinimalClassicController {
+    private static final Logger log = LogManager.getLogger(MinimalRestController.class);
 
     @GetMapping("/minimal")
     public String minimal() {
@@ -27,7 +29,7 @@ public class ClassicCtrl {
     @GetMapping("/bean")
     public String bean(Model model) {
         log.traceEntry("bean()");
-        model.addAttribute("bean", new HelloBean("Hello World!"));
+        model.addAttribute("bean", new Hello("Hello World!"));
         return "/m1/s2/bean";
     }
 }

@@ -1,20 +1,20 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
-package com.example.swr.m1.s2;
+package com.example.swr.model;
 
 /**
  * A very simple JavaBean
  */
-public class HelloBean {
+public class Hello {
     private String message;
 
-    public HelloBean() {
+    public Hello() {
     }
 
-    public HelloBean(String message) {
+    public Hello(String message) {
         this.message = message;
     }
 
