@@ -1,7 +1,7 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
 package com.example.swr;
 
@@ -26,14 +26,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.swr.dao.Coder;
-import com.example.swr.dao.CoderRepo;
 import com.example.swr.m2.s2.CoderGetCtrl;
+import com.example.swr.model.Coder;
+import com.example.swr.repository.CoderRepository;
 
 @WebMvcTest(CoderGetCtrl.class)
 class CoderRestCtrTest {
     @MockitoBean
-    private CoderRepo repo;
+    private CoderRepository repo;
 
     @Autowired
     private MockMvc mockMvc;

@@ -1,7 +1,7 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
 package com.example.swr;
 
@@ -25,7 +25,7 @@ class HelloCtrlTest {
 
     @Test
     void getHello() throws Exception {
-        mvc.perform(get("/api/m1/s2/hello")) //
+        mvc.perform(get("/api/m1/s2/bean")) //
                 .andExpect(status().isOk()) //
                 .andExpect(jsonPath("$.message").value("Hello World!"));
     }
@@ -40,7 +40,7 @@ class HelloCtrlTest {
 
     @Test
     void putHello() throws Exception {
-        mvc.perform(put("/api/m1/s2/hello")) //
+        mvc.perform(put("/api/m1/s2/bean")) //
                 .andExpect(status().isMethodNotAllowed());
     }
 }
