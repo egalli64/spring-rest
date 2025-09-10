@@ -1,3 +1,8 @@
+/*
+ * Spring Boot Web REST tutorial 
+ * 
+ * https://github.com/egalli64/spring-rest
+ */
 package com.example.swr.x;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.swr.dao.Coder;
-import com.example.swr.dao.CoderRepo;
+import com.example.swr.model.Coder;
+import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/coders")
@@ -23,9 +28,9 @@ import com.example.swr.dao.CoderRepo;
 public class CoderController {
     private static final Logger log = LogManager.getLogger(CoderController.class);
 
-    private CoderRepo repo;
+    private CoderRepository repo;
 
-    public CoderController(CoderRepo repo) {
+    public CoderController(CoderRepository repo) {
         this.repo = repo;
     }
 

@@ -1,7 +1,7 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
 package com.example.swr.m3.s2;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.swr.dao.Coder;
-import com.example.swr.dao.CoderRepo;
+import com.example.swr.model.Coder;
+import com.example.swr.repository.CoderRepository;
 
 /**
  * A controller using ResponseEntity
@@ -27,9 +27,9 @@ import com.example.swr.dao.CoderRepo;
 public class CoderResponseCtrl {
     private static final Logger log = LogManager.getLogger(CoderResponseCtrl.class);
 
-    private CoderRepo repo;
+    private CoderRepository repo;
 
-    public CoderResponseCtrl(CoderRepo repo) {
+    public CoderResponseCtrl(CoderRepository repo) {
         this.repo = repo;
     }
 

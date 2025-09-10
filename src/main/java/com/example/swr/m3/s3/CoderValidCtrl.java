@@ -1,7 +1,7 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
 package com.example.swr.m3.s3;
 
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.swr.dao.Coder;
-import com.example.swr.dao.CoderRepo;
+import com.example.swr.model.Coder;
+import com.example.swr.repository.CoderRepository;
 
 import jakarta.validation.Valid;
 
@@ -31,9 +31,9 @@ import jakarta.validation.Valid;
 public class CoderValidCtrl {
     private static final Logger log = LogManager.getLogger(CoderValidCtrl.class);
 
-    private CoderRepo repo;
+    private CoderRepository repo;
 
-    public CoderValidCtrl(CoderRepo repo) {
+    public CoderValidCtrl(CoderRepository repo) {
         this.repo = repo;
     }
 

@@ -1,7 +1,7 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
 package com.example.swr.m2.s6;
 
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.swr.dao.CoderRepo;
+import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/api/m2/s6")
 public class CoderDeleteCtrl {
     private static final Logger log = LogManager.getLogger(CoderDeleteCtrl.class);
 
-    private CoderRepo repo;
+    private CoderRepository repo;
 
-    public CoderDeleteCtrl(CoderRepo repo) {
+    public CoderDeleteCtrl(CoderRepository repo) {
         this.repo = repo;
     }
 

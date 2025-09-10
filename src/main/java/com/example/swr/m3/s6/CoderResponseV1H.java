@@ -1,7 +1,7 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
 package com.example.swr.m3.s6;
 

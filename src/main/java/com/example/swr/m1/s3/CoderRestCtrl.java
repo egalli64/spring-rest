@@ -1,7 +1,7 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
 package com.example.swr.m1.s3;
 
@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.swr.dao.Coder;
-import com.example.swr.dao.CoderRepo;
+import com.example.swr.model.Coder;
+import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/api/m1/s3")
 public class CoderRestCtrl {
     private static final Logger log = LogManager.getLogger(CoderRestCtrl.class);
 
-    private CoderRepo repo;
+    private CoderRepository repo;
 
-    public CoderRestCtrl(CoderRepo repo) {
+    public CoderRestCtrl(CoderRepository repo) {
         this.repo = repo;
     }
 
