@@ -55,6 +55,14 @@ public class Coder {
     public Coder() {
     }
 
+    public Coder(Integer id, String firstName, String lastName, LocalDate hireDate, BigDecimal salary) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.hireDate = hireDate;
+        this.salary = salary;
+    }
+
     public Integer getId() {
         return id;
     }
