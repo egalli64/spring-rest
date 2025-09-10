@@ -1,9 +1,9 @@
 /*
- * A Spring Boot RESTful application 
+ * Spring Boot Web REST tutorial 
  * 
- * https://github.com/egalli64/swr
+ * https://github.com/egalli64/spring-rest
  */
-package com.example.swr.dao;
+package com.example.swr.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 /**
- * A simple entity JPA
+ * A JPA entity
  */
 @Entity
 @Table(name = "CODERS")
