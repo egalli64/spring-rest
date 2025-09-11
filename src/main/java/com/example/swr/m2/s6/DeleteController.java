@@ -19,12 +19,12 @@ import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/api/m2/s6")
-public class CoderDeleteCtrl {
-    private static final Logger log = LogManager.getLogger(CoderDeleteCtrl.class);
+public class DeleteController {
+    private static final Logger log = LogManager.getLogger(DeleteController.class);
 
     private CoderRepository repo;
 
-    public CoderDeleteCtrl(CoderRepository repo) {
+    public DeleteController(CoderRepository repo) {
         this.repo = repo;
     }
 
@@ -32,7 +32,7 @@ public class CoderDeleteCtrl {
      * Assuming coder 1 has already been inserted - see POST in previous example
      * 
      * <pre>
-     * curl -i -X DELETE localhost:8080/api/m2/s6/coders/1
+        curl -i -X DELETE localhost:8080/api/m2/s6/coders/1
      * </pre>
      */
     @DeleteMapping("/coders/{id}")
