@@ -19,12 +19,12 @@ import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/api/m1/s3")
-public class CoderRestCtrl {
-    private static final Logger log = LogManager.getLogger(CoderRestCtrl.class);
+public class PlainController {
+    private static final Logger log = LogManager.getLogger(PlainController.class);
 
     private CoderRepository repo;
 
-    public CoderRestCtrl(CoderRepository repo) {
+    public PlainController(CoderRepository repo) {
         this.repo = repo;
     }
 
