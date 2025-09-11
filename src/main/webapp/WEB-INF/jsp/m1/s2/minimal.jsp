@@ -1,6 +1,11 @@
+<!--
+    Spring Boot Web REST tutorial
+
+    https://github.com/egalli64/spring-rest
+ -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Spring View by JSP</title>
