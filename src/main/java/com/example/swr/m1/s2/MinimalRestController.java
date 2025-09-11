@@ -23,12 +23,26 @@ import com.example.swr.model.Hello;
 public class MinimalRestController {
     private static final Logger log = LogManager.getLogger(MinimalRestController.class);
 
+    /**
+     * <pre>
+        curl -v localhost:8080/api/m1/s2/answer
+        
+        curl -v localhost:8080/api/m1/s2/answer -H "Origin: http://localhost:4200"
+     * </pre>
+     */
     @GetMapping("/answer")
     int answer() {
         log.traceEntry("answer()");
         return 42;
     }
 
+    /**
+     * <pre>
+        curl -v localhost:8080/api/m1/s2/bean
+        
+        curl -v localhost:8080/api/m1/s2/bean -H "Origin: http://localhost:4200"
+     * </pre>
+     */
     @GetMapping("/bean")
     Hello bean() {
         log.traceEntry("bean()");
