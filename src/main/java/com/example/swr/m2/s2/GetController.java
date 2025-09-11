@@ -19,12 +19,12 @@ import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/api/m2/s2")
-public class CoderGetCtrl {
-    private static final Logger log = LogManager.getLogger(CoderGetCtrl.class);
+public class GetController {
+    private static final Logger log = LogManager.getLogger(GetController.class);
 
     private CoderRepository repo;
 
-    public CoderGetCtrl(CoderRepository repo) {
+    public GetController(CoderRepository repo) {
         this.repo = repo;
     }
 
@@ -40,8 +40,12 @@ public class CoderGetCtrl {
     }
 
     /**
+     * Found: 200, not found: 404
+     * 
      * <pre>
         curl -v localhost:8080/api/m2/s2/coders/107
+        
+        curl -v localhost:8080/api/m2/s2/coders/99
      * </pre>
      */
     @GetMapping("/coders/{id}")

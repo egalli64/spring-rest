@@ -26,12 +26,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.swr.m2.s2.CoderGetCtrl;
+import com.example.swr.m2.s2.GetController;
 import com.example.swr.model.Coder;
 import com.example.swr.repository.CoderRepository;
 
-@WebMvcTest(CoderGetCtrl.class)
-class CoderRestCtrTest {
+@WebMvcTest(GetController.class)
+class GetControllerTest {
     @MockitoBean
     private CoderRepository repo;
 
