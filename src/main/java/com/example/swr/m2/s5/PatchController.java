@@ -20,18 +20,19 @@ import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/api/m2/s5")
-public class CoderPatchCtrl {
-    private static final Logger log = LogManager.getLogger(CoderPatchCtrl.class);
+public class PatchController {
+    private static final Logger log = LogManager.getLogger(PatchController.class);
 
     private CoderRepository repo;
 
-    public CoderPatchCtrl(CoderRepository repo) {
+    public PatchController(CoderRepository repo) {
         this.repo = repo;
     }
 
     /**
+     * Assuming coder 1 has already been inserted - see POST in previous example
+     * 
      * <pre>
-        Assuming coder 1 has already been inserted - see POST in previous example
         curl -i -X PATCH -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"Bob\"}" ^
          localhost:8080/api/m2/s5/coders/1
