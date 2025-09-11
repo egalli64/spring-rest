@@ -20,16 +20,18 @@ import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/api/m2/s3")
-public class CoderPostCtrl {
-    private static final Logger log = LogManager.getLogger(CoderPostCtrl.class);
+public class PostController {
+    private static final Logger log = LogManager.getLogger(PostController.class);
 
     private CoderRepository repo;
 
-    public CoderPostCtrl(CoderRepository repo) {
+    public PostController(CoderRepository repo) {
         this.repo = repo;
     }
 
     /**
+     * Success: 201, 409 requires an explicit check, see validation for easy 400
+     * 
      * <pre>
         curl -i -X POST -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"Tom\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\"}" ^
