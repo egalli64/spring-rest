@@ -20,18 +20,19 @@ import com.example.swr.repository.CoderRepository;
 
 @RestController
 @RequestMapping("/api/m2/s4")
-public class CoderPutCtrl {
-    private static final Logger log = LogManager.getLogger(CoderPutCtrl.class);
+public class PutController {
+    private static final Logger log = LogManager.getLogger(PutController.class);
 
     private CoderRepository repo;
 
-    public CoderPutCtrl(CoderRepository repo) {
+    public PutController(CoderRepository repo) {
         this.repo = repo;
     }
 
     /**
+     * Assuming coder 1 has already been inserted - see POST in previous example
+     * 
      * <pre>
-        Assuming coder 1 has already been inserted - see POST in previous example
         curl -i -X PUT -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"Tommy\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\"}" ^
          localhost:8080/api/m2/s4/coders/1
