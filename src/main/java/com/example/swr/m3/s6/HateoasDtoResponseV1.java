@@ -10,22 +10,22 @@ import java.time.LocalDate;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.example.swr.m3.s5.VersionedCoder;
+import com.example.swr.m3.s5.EntityV2;
 
 /**
  * HATEOAS Coder DTO for response - version 1 (no email)
  */
-public class CoderResponseV1H extends RepresentationModel<CoderResponseV1H> {
+public class HateoasDtoResponseV1 extends RepresentationModel<HateoasDtoResponseV1> {
     private Integer id;
     private String firstName;
     private String lastName;
     private LocalDate hireDate;
     private BigDecimal salary;
 
-    public CoderResponseV1H() {
+    public HateoasDtoResponseV1() {
     }
 
-    public CoderResponseV1H(Integer coderId, String firstName, String lastName, LocalDate hireDate, BigDecimal salary) {
+    public HateoasDtoResponseV1(Integer coderId, String firstName, String lastName, LocalDate hireDate, BigDecimal salary) {
         this.id = coderId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,7 +36,7 @@ public class CoderResponseV1H extends RepresentationModel<CoderResponseV1H> {
     /**
      * Entity to Response DTO mapper
      */
-    public CoderResponseV1H(VersionedCoder coder) {
+    public HateoasDtoResponseV1(EntityV2 coder) {
         this(coder.getId(), coder.getFirstName(), coder.getLastName(), coder.getHireDate(), coder.getSalary());
     }
 

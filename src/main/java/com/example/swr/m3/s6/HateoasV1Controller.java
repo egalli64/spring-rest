@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.swr.m3.s3.CoderNotFoundException;
-import com.example.swr.m3.s5.CoderRequestV1;
-import com.example.swr.m3.s5.VersionedCoder;
-import com.example.swr.m3.s5.VersionedCoderRepo;
+import com.example.swr.exception.CoderNotFoundException;
+import com.example.swr.m3.s5.DtoRequestV1;
+import com.example.swr.m3.s5.EntityV2;
+import com.example.swr.m3.s5.VersionedRepository;
 
 import jakarta.validation.Valid;
 
@@ -36,16 +36,16 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/v1/m3/s6/coders")
-public class CoderV1HCtrl {
+public class HateoasV1Controller {
     private static final String DEFAULT_EMAIL = "default@example.com";
-    private static final Logger log = LogManager.getLogger(CoderV1HCtrl.class);
+    private static final Logger log = LogManager.getLogger(HateoasV1Controller.class);
 
-    private final VersionedCoderRepo repo;
-    private final PagedResourcesAssembler<VersionedCoder> pagedAsm;
-    private final CoderV1Assembler coderAsm;
+    private final VersionedRepository repo;
+    private final PagedResourcesAssembler<EntityV2> pagedAsm;
+    private final AssemblerVersion1 coderAsm;
 
-    public CoderV1HCtrl(VersionedCoderRepo repo, PagedResourcesAssembler<VersionedCoder> pagedAsm,
-            CoderV1Assembler coderAsm) {
+    public HateoasV1Controller(VersionedRepository repo, PagedResourcesAssembler<EntityV2> pagedAsm,
+            AssemblerVersion1 coderAsm) {
         this.repo = repo;
         this.pagedAsm = pagedAsm;
         this.coderAsm = coderAsm;
@@ -55,14 +55,15 @@ public class CoderV1HCtrl {
      * Get all coders paged and sorted
      * 
      * <pre>
-     * curl -v localhost:8080/api/v1/m3/s5/coders
+         curl -v localhost:8080/api/v1/m3/s5/coders
      * </pre>
      */
     @GetMapping
-    public ResponseEntity<PagedModel<CoderResponseV1H>> getAll(@PageableDefault(sort = "lastName") Pageable pageable) {
+    public ResponseEntity<PagedModel<HateoasDtoResponseV1>> getAll(
+            @PageableDefault(sort = "lastName") Pageable pageable) {
         log.traceEntry("get all {}", pageable);
 
-        Page<VersionedCoder> page = repo.findAll(pageable);
+        Page<EntityV2> page = repo.findAll(pageable);
         return ResponseEntity.ok(pagedAsm.toModel(page, coderAsm));
     }
 
@@ -70,15 +71,14 @@ public class CoderV1HCtrl {
      * Get a coder by id
      * 
      * <pre>
-     * curl -v http://localhost:8080/api/v1/m3/s6/coders/105
+         curl -v http://localhost:8080/api/v1/m3/s6/coders/105
      * </pre>
      */
     @GetMapping("/{id}")
-    public ResponseEntity<CoderResponseV1H> get(@PathVariable Integer id) {
-        log.traceEntry("get {}", id);
+    public ResponseEntity<HateoasDtoResponseV1> get(@PathVariable Integer id) {
+        log.traceEntry("get({})", id);
 
-        VersionedCoder coder = repo.findById(id)
-                .orElseThrow(() -> new CoderNotFoundException("Coder " + id + " not found"));
+        EntityV2 coder = repo.findById(id).orElseThrow(() -> new CoderNotFoundException(id));
 
         return ResponseEntity.ok(coderAsm.toModel(coder));
     }
@@ -87,19 +87,19 @@ public class CoderV1HCtrl {
      * Create coder (defaulting email)
      * 
      * <pre>
-     * curl -i -X POST -H "Content-Type: application/json" -d ^
+         curl -i -X POST -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"Tom\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\"}" ^
          localhost:8080/api/v1/m3/s5/coders
      * </pre>
      * 
      */
     @PostMapping
-    public ResponseEntity<CoderResponseV1H> create(@Valid @RequestBody CoderRequestV1 dto) {
-        log.traceEntry("create {}", dto);
+    public ResponseEntity<HateoasDtoResponseV1> create(@Valid @RequestBody DtoRequestV1 dto) {
+        log.traceEntry("create({})", dto);
 
-        var coder = new VersionedCoder(dto.firstName(), dto.lastName(), dto.hireDate(), dto.salary(), DEFAULT_EMAIL);
-        VersionedCoder result = repo.save(coder);
-        return ResponseEntity.created(location(result.getId())).body(new CoderResponseV1H(result));
+        EntityV2 coder = new EntityV2(dto.firstName(), dto.lastName(), dto.hireDate(), dto.salary(), DEFAULT_EMAIL);
+        EntityV2 result = repo.save(coder);
+        return ResponseEntity.created(location(result.getId())).body(new HateoasDtoResponseV1(result));
     }
 
     /**
@@ -113,17 +113,16 @@ public class CoderV1HCtrl {
      * Update coder (ignoring email)
      * 
      * <pre>
-     * curl -i -X PUT -H "Content-Type: application/json" -d ^
+         curl -i -X PUT -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"TJ\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\"}" ^
          localhost:8080/api/v1/m3/s5/coders/1
      * </pre>
      */
     @PutMapping("/{id}")
-    public ResponseEntity<CoderResponseV1H> update(@PathVariable Integer id, @Valid @RequestBody CoderRequestV1 dto) {
-        log.traceEntry("update {} {}", id, dto);
+    public ResponseEntity<HateoasDtoResponseV1> update(@PathVariable Integer id, @Valid @RequestBody DtoRequestV1 dto) {
+        log.traceEntry("update({}, {})", id, dto);
 
-        VersionedCoder coder = repo.findById(id)
-                .orElseThrow(() -> new CoderNotFoundException("Coder " + id + " not found"));
+        EntityV2 coder = repo.findById(id).orElseThrow(() -> new CoderNotFoundException(id));
 
         coder.setFirstName(dto.firstName());
         coder.setLastName(dto.lastName());
@@ -134,7 +133,7 @@ public class CoderV1HCtrl {
             coder.setEmail("default@example.com");
         }
 
-        VersionedCoder result = repo.save(coder);
-        return ResponseEntity.ok(new CoderResponseV1H(result));
+        EntityV2 result = repo.save(coder);
+        return ResponseEntity.ok(new HateoasDtoResponseV1(result));
     }
 }
