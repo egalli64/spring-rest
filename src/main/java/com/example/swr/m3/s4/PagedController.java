@@ -16,18 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.swr.model.Coder;
+import com.example.swr.repository.CoderRepository;
 
 /**
  * A paged/sorted controller
  */
 @RestController
 @RequestMapping("/api/m3/s4/coders")
-public class PagedCoderCtrl {
-    private static final Logger log = LogManager.getLogger(PagedCoderCtrl.class);
+public class PagedController {
+    private static final Logger log = LogManager.getLogger(PagedController.class);
 
-    private PagedCoderRepo repo;
+    private CoderRepository repo;
 
-    public PagedCoderCtrl(PagedCoderRepo repo) {
+    public PagedController(CoderRepository repo) {
         this.repo = repo;
     }
 
@@ -35,10 +36,14 @@ public class PagedCoderCtrl {
      * Get all coders - paged and sorted - see defaults
      * 
      * <pre>
-     * Default             : curl -v localhost:8080/api/m3/s4/coders
-     * Given page and size : curl -v localhost:8080/api/m3/s4/coders?page=1&size=5
-     * Given page and sort : curl -v localhost:8080/api/m3/s4/coders?page=1&sort=salary,desc
-     * Multiple sort criteria: curl -v localhost:8080/api/m3/s4/coders?sort=firstName,asc&sort=lastName,desc
+     * Default: 
+         curl -v "localhost:8080/api/m3/s4/coders"
+     * Given page and size:
+         curl -v "localhost:8080/api/m3/s4/coders?page=1&size=5"
+     * Given page and sort:
+         curl -v "localhost:8080/api/m3/s4/coders?page=1&sort=salary,desc"
+     * Multiple sort criteria:
+         curl -v "localhost:8080/api/m3/s4/coders?sort=firstName,asc&sort=lastName,desc"
      * </pre>
      */
     @GetMapping
