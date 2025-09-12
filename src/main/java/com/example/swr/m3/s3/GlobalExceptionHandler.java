@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.example.swr.exception.CoderNotFoundException;
+
 import jakarta.validation.ConstraintViolationException;
 
 /**
@@ -38,7 +40,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        log.traceEntry("Not valid");
+        log.traceEntry("handleMethodArgumentNotValid()");
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
@@ -47,7 +49,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         // Get all errors
         List<String> errors = ex.getBindingResult().getFieldErrors().stream()
                 .map(x -> x.getField() + ": " + x.getDefaultMessage()).collect(Collectors.toList());
-
         body.put("errors", errors);
 
         return new ResponseEntity<>(body, headers, HttpStatus.BAD_REQUEST);
@@ -58,7 +59,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, WebRequest request) {
-        log.traceEntry("Constraint violation");
+        log.traceEntry("handleConstraintViolation()");
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());

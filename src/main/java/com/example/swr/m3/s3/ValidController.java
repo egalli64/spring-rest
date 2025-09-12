@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.swr.exception.CoderNotFoundException;
 import com.example.swr.model.Coder;
 import com.example.swr.repository.CoderRepository;
 
@@ -28,18 +29,18 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/m3/s3/coders")
-public class CoderValidCtrl {
-    private static final Logger log = LogManager.getLogger(CoderValidCtrl.class);
+public class ValidController {
+    private static final Logger log = LogManager.getLogger(ValidController.class);
 
     private CoderRepository repo;
 
-    public CoderValidCtrl(CoderRepository repo) {
+    public ValidController(CoderRepository repo) {
         this.repo = repo;
     }
 
     /**
      * <pre>
-     * curl -i -X POST -H "Content-Type: application/json" -d "{\"firstName\":\"A\"}" localhost:8080/api/m3/s3/coders
+         curl -i -X POST -H "Content-Type: application/json" -d "{\"firstName\":\"A\"}" localhost:8080/api/m3/s3/coders
      * </pre>
      */
     @PostMapping
@@ -47,17 +48,17 @@ public class CoderValidCtrl {
         log.trace("create {}", dto);
         Coder savedCoder = repo.save(dto);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedCoder.getId())
-                .toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}") //
+                .buildAndExpand(savedCoder.getId()).toUri();
         return ResponseEntity.created(location).body(savedCoder);
     }
 
     /**
      * 
      * <pre>
-     curl -i -X PUT -H "Content-Type: application/json" -d ^
-         "{\"firstName\":\"T\"}" ^
-         localhost:8080/api/m3/s3/coders/1
+         curl -i -X PUT -H "Content-Type: application/json" -d ^
+             "{\"firstName\":\"T\"}" ^ 
+             localhost:8080/api/m3/s3/coders/1
      * </pre>
      * 
      * Notice:
@@ -71,8 +72,7 @@ public class CoderValidCtrl {
     public ResponseEntity<Coder> update(@PathVariable Integer id, @Valid @RequestBody Coder dto) {
         log.trace("update {} {}", id, dto);
 
-        Coder coder = repo.findById(id)
-                .orElseThrow(() -> new CoderNotFoundException("Coder with ID " + id + " not found for update"));
+        Coder coder = repo.findById(id).orElseThrow(() -> new CoderNotFoundException(id));
 
         // copy fields from coder DTO in the coder JPA entity
         coder.setFirstName(dto.getFirstName());
