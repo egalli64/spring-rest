@@ -5,15 +5,16 @@
  */
 package com.example.swr.m2.s2;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
+import com.example.swr.exception.CoderNotFoundException;
 import com.example.swr.model.Coder;
 import com.example.swr.repository.CoderRepository;
 
@@ -34,7 +35,7 @@ public class GetController {
      * </pre>
      */
     @GetMapping("/coders")
-    public Iterable<Coder> getAll() {
+    public List<Coder> getAll() {
         log.traceEntry("getAll");
         return repo.findAll();
     }
@@ -52,7 +53,6 @@ public class GetController {
     public Coder get(@PathVariable Integer id) {
         log.traceEntry("get " + id);
 
-        return repo.findById(id).orElseThrow( //
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Coder %d not found", id)));
+        return repo.findById(id).orElseThrow(() -> new CoderNotFoundException(id));
     }
 }

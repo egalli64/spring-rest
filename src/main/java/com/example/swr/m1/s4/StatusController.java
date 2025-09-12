@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.example.swr.exception.CoderNotFoundException;
 import com.example.swr.model.Coder;
 import com.example.swr.repository.CoderRepository;
 
@@ -40,8 +41,7 @@ public class StatusController {
     @GetMapping("/coders/{id}")
     public Coder get(@PathVariable Integer id) {
         log.traceEntry("get " + id);
-        return repo.findById(id).orElseThrow( //
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Coder %d not found", id)));
+        return repo.findById(id).orElseThrow(() -> new CoderNotFoundException(id));
     }
 
     /**
