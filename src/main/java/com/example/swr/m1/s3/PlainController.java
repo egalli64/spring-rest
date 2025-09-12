@@ -62,7 +62,7 @@ public class PlainController {
      * </pre>
      */
     @GetMapping("crash")
-    public Iterable<Coder> crash() {
+    public void crash() {
         log.traceEntry("crash");
         throw new IllegalStateException("Something bad happened");
     }
