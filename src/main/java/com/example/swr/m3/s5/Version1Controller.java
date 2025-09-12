@@ -7,7 +7,6 @@ package com.example.swr.m3.s5;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.swr.m3.s3.CoderNotFoundException;
+import com.example.swr.exception.CoderNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -30,13 +29,13 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/v1/m3/s5/coders")
-public class CoderV1Ctrl {
+public class Version1Controller {
     private static final String DEFAULT_EMAIL = "default@example.com";
-    private static final Logger log = LogManager.getLogger(CoderV1Ctrl.class);
+    private static final Logger log = LogManager.getLogger(Version1Controller.class);
 
-    private VersionedCoderRepo repo;
+    private VersionedRepository repo;
 
-    public CoderV1Ctrl(VersionedCoderRepo repo) {
+    public Version1Controller(VersionedRepository repo) {
         this.repo = repo;
     }
 
@@ -44,15 +43,14 @@ public class CoderV1Ctrl {
      * Get all coders (ignore email)
      * 
      * <pre>
-     * curl -v localhost:8080/api/v1/m3/s5/coders
+         curl -v localhost:8080/api/v1/m3/s5/coders
      * </pre>
      */
     @GetMapping
-    public ResponseEntity<List<CoderResponseV1>> getAll() {
-        log.traceEntry("get all");
+    public ResponseEntity<List<DtoResponseV1>> getAll() {
+        log.traceEntry("getAll()");
 
-        var coders = repo.findAll();
-        var response = StreamSupport.stream(coders.spliterator(), false).map(CoderResponseV1::new).toList();
+        List<DtoResponseV1> response = repo.findAll().stream().map(DtoResponseV1::new).toList();
         return ResponseEntity.ok(response);
     }
 
@@ -60,19 +58,19 @@ public class CoderV1Ctrl {
      * Create coder (defaulting email)
      * 
      * <pre>
-     * curl -i -X POST -H "Content-Type: application/json" -d ^
+         curl -i -X POST -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"Tom\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\"}" ^
          localhost:8080/api/v1/m3/s5/coders
      * </pre>
      * 
      */
     @PostMapping
-    public ResponseEntity<CoderResponseV1> create(@Valid @RequestBody CoderRequestV1 dto) {
-        log.traceEntry("create {}", dto);
+    public ResponseEntity<DtoResponseV1> create(@Valid @RequestBody DtoRequestV1 dto) {
+        log.traceEntry("create({})", dto);
 
-        var coder = new VersionedCoder(dto.firstName(), dto.lastName(), dto.hireDate(), dto.salary(), DEFAULT_EMAIL);
-        VersionedCoder result = repo.save(coder);
-        return ResponseEntity.created(location(result.getId())).body(new CoderResponseV1(result));
+        var coder = new EntityV2(dto.firstName(), dto.lastName(), dto.hireDate(), dto.salary(), DEFAULT_EMAIL);
+        EntityV2 result = repo.save(coder);
+        return ResponseEntity.created(location(result.getId())).body(new DtoResponseV1(result));
     }
 
     /**
@@ -86,17 +84,16 @@ public class CoderV1Ctrl {
      * Update coder (ignoring email)
      * 
      * <pre>
-     * curl -i -X PUT -H "Content-Type: application/json" -d ^
+         curl -i -X PUT -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"TJ\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\"}" ^
          localhost:8080/api/v1/m3/s5/coders/1
      * </pre>
      */
     @PutMapping("/{id}")
-    public ResponseEntity<CoderResponseV1> update(@PathVariable Integer id, @Valid @RequestBody CoderRequestV1 dto) {
-        log.traceEntry("update {} {}", id, dto);
+    public ResponseEntity<DtoResponseV1> update(@PathVariable Integer id, @Valid @RequestBody DtoRequestV1 dto) {
+        log.traceEntry("update({} {})", id, dto);
 
-        VersionedCoder coder = repo.findById(id)
-                .orElseThrow(() -> new CoderNotFoundException("Coder " + id + " not found"));
+        EntityV2 coder = repo.findById(id).orElseThrow(() -> new CoderNotFoundException(id));
 
         coder.setFirstName(dto.firstName());
         coder.setLastName(dto.lastName());
@@ -107,7 +104,7 @@ public class CoderV1Ctrl {
             coder.setEmail("default@example.com");
         }
 
-        VersionedCoder result = repo.save(coder);
-        return ResponseEntity.ok(new CoderResponseV1(result));
+        EntityV2 result = repo.save(coder);
+        return ResponseEntity.ok(new DtoResponseV1(result));
     }
 }

@@ -11,9 +11,9 @@ import java.time.LocalDate;
 /**
  * Coder DTO for request - version 2 (email added)
  */
-public record CoderResponseV2(Integer id, String firstName, String lastName, LocalDate hireDate, BigDecimal salary,
+public record DtoResponseV2(Integer id, String firstName, String lastName, LocalDate hireDate, BigDecimal salary,
         String email) {
-    public CoderResponseV2(VersionedCoder coder) {
+    public DtoResponseV2(EntityV2 coder) {
         this(coder.getId(), coder.getFirstName(), coder.getLastName(), coder.getHireDate(), coder.getSalary(),
                 coder.getEmail());
     }

@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  * DTOs are not considered here, we care only about the entity
  */
 @Repository
-public interface VersionedCoderRepo extends JpaRepository<VersionedCoder, Integer> {
+public interface VersionedRepository extends JpaRepository<EntityV2, Integer> {
 }

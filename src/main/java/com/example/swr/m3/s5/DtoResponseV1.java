@@ -11,8 +11,8 @@ import java.time.LocalDate;
 /**
  * Coder DTO for response - version 1 (no email)
  */
-public record CoderResponseV1(Integer id, String firstName, String lastName, LocalDate hireDate, BigDecimal salary) {
-    public CoderResponseV1(VersionedCoder coder) {
+public record DtoResponseV1(Integer id, String firstName, String lastName, LocalDate hireDate, BigDecimal salary) {
+    public DtoResponseV1(EntityV2 coder) {
         this(coder.getId(), coder.getFirstName(), coder.getLastName(), coder.getHireDate(), coder.getSalary());
     }
 }

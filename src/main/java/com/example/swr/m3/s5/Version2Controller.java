@@ -7,7 +7,6 @@ package com.example.swr.m3.s5;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.swr.m3.s3.CoderNotFoundException;
+import com.example.swr.exception.CoderNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -30,12 +29,12 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/v2/m3/s5/coders")
-public class CoderV2Ctrl {
-    private static final Logger log = LogManager.getLogger(CoderV2Ctrl.class);
+public class Version2Controller {
+    private static final Logger log = LogManager.getLogger(Version2Controller.class);
 
-    private VersionedCoderRepo repo;
+    private VersionedRepository repo;
 
-    public CoderV2Ctrl(VersionedCoderRepo repo) {
+    public Version2Controller(VersionedRepository repo) {
         this.repo = repo;
     }
 
@@ -43,15 +42,14 @@ public class CoderV2Ctrl {
      * Get all coders
      * 
      * <pre>
-     * curl -v localhost:8080/api/v2/m3/s5/coders
+        curl -v localhost:8080/api/v2/m3/s5/coders
      * </pre>
      */
     @GetMapping
-    public ResponseEntity<List<CoderResponseV2>> getAll() {
-        log.traceEntry("get all");
+    public ResponseEntity<List<DtoResponseV2>> getAll() {
+        log.traceEntry("getAll()");
 
-        var coders = repo.findAll();
-        var response = StreamSupport.stream(coders.spliterator(), false).map(CoderResponseV2::new).toList();
+        List<DtoResponseV2> response = repo.findAll().stream().map(DtoResponseV2::new).toList();
         return ResponseEntity.ok(response);
     }
 
@@ -59,19 +57,19 @@ public class CoderV2Ctrl {
      * Create coder
      * 
      * <pre>
-     * curl -i -X POST -H "Content-Type: application/json" -d ^
+         curl -i -X POST -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"Tom\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\",\"email\":\"ts@example.com\"}" ^
          localhost:8080/api/v2/m3/s5/coders
      * </pre>
      */
     @PostMapping
-    public ResponseEntity<CoderResponseV2> create(@Valid @RequestBody CoderRequestV2 dto) {
-        log.traceEntry("create {}", dto);
+    public ResponseEntity<DtoResponseV2> create(@Valid @RequestBody DtoRequestV2 dto) {
+        log.traceEntry("create({})", dto);
 
-        var coder = new VersionedCoder(dto.firstName(), dto.lastName(), dto.hireDate(), dto.salary(), dto.email());
+        var coder = new EntityV2(dto.firstName(), dto.lastName(), dto.hireDate(), dto.salary(), dto.email());
 
-        VersionedCoder result = repo.save(coder);
-        CoderResponseV2 response = new CoderResponseV2(result);
+        EntityV2 result = repo.save(coder);
+        DtoResponseV2 response = new DtoResponseV2(result);
         return ResponseEntity.created(location(response.id())).body(response);
     }
 
@@ -86,17 +84,16 @@ public class CoderV2Ctrl {
      * Update coder
      * 
      * <pre>
-     * curl -i -X PUT -H "Content-Type: application/json" -d ^
+         curl -i -X PUT -H "Content-Type: application/json" -d ^
          "{\"firstName\":\"TJ\",\"lastName\":\"Smith\",\"hireDate\":\"2025-01-01\",\"salary\":\"7200.0\",\"email\":\"ts@example.com\"}" ^
          localhost:8080/api/v2/m3/s5/coders/1
      * </pre>
      */
     @PutMapping("/{id}")
-    public ResponseEntity<CoderResponseV2> update(@PathVariable Integer id, @Valid @RequestBody CoderRequestV2 dto) {
-        log.traceEntry("update {} {}", id, dto);
+    public ResponseEntity<DtoResponseV2> update(@PathVariable Integer id, @Valid @RequestBody DtoRequestV2 dto) {
+        log.traceEntry("update({}, {})", id, dto);
 
-        VersionedCoder coder = repo.findById(id)
-                .orElseThrow(() -> new CoderNotFoundException("Coder " + id + " not found"));
+        EntityV2 coder = repo.findById(id).orElseThrow(() -> new CoderNotFoundException(id));
 
         coder.setFirstName(dto.firstName());
         coder.setLastName(dto.lastName());
@@ -104,7 +101,8 @@ public class CoderV2Ctrl {
         coder.setSalary(dto.salary());
         coder.setEmail(dto.email());
 
-        var result = repo.save(coder);
-        return ResponseEntity.ok(new CoderResponseV2(result));
+        EntityV2 result = repo.save(coder);
+        DtoResponseV2 response = new DtoResponseV2(result);
+        return ResponseEntity.ok(response);
     }
 }
